@@ -1,0 +1,327 @@
+{
+  "entities": {
+    "Development": {
+      "title": "Development",
+      "description": "Empreendimento ou piso com a respetiva planta arquitetónica.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "Nome do empreendimento ou planta."
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 180,
+          "description": "Localização ou descrição curta do piso."
+        },
+        "floorLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Designação do piso (ex: Piso 1)."
+        },
+        "floorPlanUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 900000,
+          "description": "Caminho ou Data URL comprimido da planta."
+        },
+        "isPublished": {
+          "type": "boolean",
+          "description": "Indica se o empreendimento está visível publicamente."
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "UID do proprietário que criou o empreendimento."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de criação no servidor."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data da última atualização no servidor."
+        }
+      },
+      "required": [
+        "name",
+        "subtitle",
+        "floorLabel",
+        "floorPlanUrl",
+        "isPublished",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Unit": {
+      "title": "Unit",
+      "description": "Fração ou unidade mapeada sobre a planta do empreendimento.",
+      "type": "object",
+      "properties": {
+        "developmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identificador do empreendimento pai."
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Código da fração (ex: Fração A)."
+        },
+        "typology": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24,
+          "description": "Tipologia (ex: T1, T2, T3, Loja)."
+        },
+        "floor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Piso da fração."
+        },
+        "areaSqm": {
+          "type": "number",
+          "description": "Área bruta em m²."
+        },
+        "price": {
+          "type": "number",
+          "description": "Preço de venda em EUR."
+        },
+        "orientation": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 40,
+          "description": "Exposição solar."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["disponivel", "reservado", "vendido"],
+          "description": "Estado de disponibilidade da fração."
+        },
+        "x": {
+          "type": "number",
+          "description": "Posição horizontal (%) na planta."
+        },
+        "y": {
+          "type": "number",
+          "description": "Posição vertical (%) na planta."
+        },
+        "width": {
+          "type": "number",
+          "description": "Largura (%) da zona na planta."
+        },
+        "height": {
+          "type": "number",
+          "description": "Altura (%) da zona na planta."
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "UID do proprietário do empreendimento."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de criação no servidor."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de atualização no servidor."
+        }
+      },
+      "required": [
+        "developmentId",
+        "code",
+        "typology",
+        "floor",
+        "areaSqm",
+        "price",
+        "orientation",
+        "status",
+        "x",
+        "y",
+        "width",
+        "height",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UnitPrivateNote": {
+      "title": "UnitPrivateNote",
+      "description": "Dados privados de reserva ou comprador isolados para administradores.",
+      "type": "object",
+      "properties": {
+        "developmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "unitId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buyerName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "buyerContact": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "developmentId",
+        "unitId",
+        "buyerName",
+        "buyerContact",
+        "notes",
+        "ownerId",
+        "updatedAt"
+      ]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Registo de alterações de estado de disponibilidade em tempo real.",
+      "type": "object",
+      "properties": {
+        "developmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "unitId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "unitCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "previousStatus": {
+          "type": "string",
+          "enum": ["disponivel", "reservado", "vendido", "novo"]
+        },
+        "newStatus": {
+          "type": "string",
+          "enum": ["disponivel", "reservado", "vendido"]
+        },
+        "actorUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "actorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "developmentId",
+        "unitId",
+        "unitCode",
+        "previousStatus",
+        "newStatus",
+        "actorUid",
+        "actorName",
+        "ownerId",
+        "createdAt"
+      ]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Utilizador com permissões de administrador.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/developments/{developmentId}": {
+      "schema": { "$ref": "#/entities/Development" },
+      "description": "Coleção principal de empreendimentos e plantas."
+    },
+    "/developments/{developmentId}/units/{unitId}": {
+      "schema": { "$ref": "#/entities/Unit" },
+      "description": "Frações pertencentes a um empreendimento."
+    },
+    "/developments/{developmentId}/unitNotes/{unitId}": {
+      "schema": { "$ref": "#/entities/UnitPrivateNote" },
+      "description": "Notas privadas de comprador e reserva por fração (apenas administradores)."
+    },
+    "/developments/{developmentId}/activityLogs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Histórico imutável de alterações de disponibilidade."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Registo de administradores autorizados."
+    }
+  }
+}
